@@ -2,9 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const EditEmployee = () => {
+const EditTeacher = () => {
     const {id} = useParams()
-    const [employee, setEmployee] = useState({
+    const [teacher, setTeacher] = useState({
         name: "",
         email: "",
         category_id: "",
@@ -22,10 +22,10 @@ const EditEmployee = () => {
             }
         }).catch(err => console.log(err))
 
-        axios.get('http://localhost:3000/auth/employee/'+id)
+        axios.get('http://localhost:3000/auth/teacher/'+id)
         .then(result => {
-            setEmployee({
-                ...employee,
+            setTeacher({
+                ...teacher,
                 name: result.data.Result[0].name,
                 email: result.data.Result[0].email,
                 category_id: result.data.Result[0].category_id,
@@ -35,10 +35,10 @@ const EditEmployee = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put('http://localhost:3000/auth/edit_employee/'+id, employee)
+        axios.put('http://localhost:3000/auth/edit_teacher/'+id, teacher)
         .then(result => {
             if(result.data.Status) {
-                navigate('/dashboard/employee')
+                navigate('/dashboard/teacher')
             } else {
                 alert(result.data.Error)
             }
@@ -48,7 +48,7 @@ const EditEmployee = () => {
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
-        <h3 className="text-center">Edit Employee</h3>
+        <h3 className="text-center">Edit Teacher</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
             <label for="inputName" className="form-label">
@@ -59,9 +59,9 @@ const EditEmployee = () => {
               className="form-control rounded-0"
               id="inputName"
               placeholder="Enter Name"
-              value={employee.name}
+              value={teacher.name}
               onChange={(e) =>
-                setEmployee({ ...employee, name: e.target.value })
+                setTeacher({ ...teacher, name: e.target.value })
               }
             />
           </div>
@@ -75,9 +75,9 @@ const EditEmployee = () => {
               id="inputEmail4"
               placeholder="Enter Email"
               autoComplete="off"
-              value={employee.email}
+              value={teacher.email}
               onChange={(e) =>
-                setEmployee({ ...employee, email: e.target.value })
+                setTeacher({ ...teacher, email: e.target.value })
               }
             />
           </div>
@@ -86,7 +86,7 @@ const EditEmployee = () => {
               Category
             </label>
             <select name="category" id="category" className="form-select"
-                onChange={(e) => setEmployee({...employee, category_id: e.target.value})}>
+                onChange={(e) => setTeacher({...teacher, category_id: e.target.value})}>
               {category.map((c) => {
                 return <option value={c.id}>{c.name}</option>;
               })}
@@ -95,7 +95,7 @@ const EditEmployee = () => {
           
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">
-              Edit Employee
+              Edit Teacher
             </button>
           </div>
         </form>
@@ -104,4 +104,4 @@ const EditEmployee = () => {
   )
 }
 
-export default EditEmployee
+export default EditTeacher

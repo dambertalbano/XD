@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './style.css'
 
-const Login = () => {
-
+const TeacherLogin = () => {
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -14,11 +13,11 @@ const Login = () => {
     axios.defaults.withCredentials = true;
     const handleSubmit = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:3000/auth/adminlogin', values)
+        axios.post('http://localhost:3000/teacher/teacher_login', values)
         .then(result => {
             if(result.data.loginStatus) {
                 localStorage.setItem("valid", true)
-                navigate('/dashboard')
+                navigate('/teacher_detail/'+result.data.id)
             } else {
                 setError(result.data.Error)
             }
@@ -47,7 +46,7 @@ const Login = () => {
                 <button className='btn btn-success w-100 rounded-0 mb-2'>Log in</button>
                 <div className='mb-1'> 
                     <input type="checkbox" name="tick" id="tick" className='me-2'/>
-                    <label htmlFor="password">You are Agree with terms & conditions</label>
+                    <label htmlFor="password">You Agree with terms & conditions</label>
                 </div>
             </form>
         </div>
@@ -55,4 +54,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default TeacherLogin

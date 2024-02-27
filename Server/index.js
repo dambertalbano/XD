@@ -1,9 +1,10 @@
+import cookieParser from "cookie-parser";
+import cors from 'cors';
 import express from "express";
-import cors from 'cors'
+import Jwt from "jsonwebtoken";
 import { adminRouter } from "./Routes/AdminRoute.js";
 import { EmployeeRouter } from "./Routes/EmployeeRoute.js";
-import Jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
+import { TeacherRouter } from "./Routes/TeacherRoute.js";
 
 const app = express() 
 app.use(cors({
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use('/auth', adminRouter)
 app.use('/employee', EmployeeRouter)
+app.use('/teacher', TeacherRouter)
 app.use(express.static('Public'))
 
 const verifyUser = (req, res, next) => {
@@ -27,7 +29,7 @@ const verifyUser = (req, res, next) => {
             next()
         })
     } else {
-        return res.json({Status: false, Error: "Not autheticated"})
+        return res.json({Status: false, Error: "Not authenticated"})
     }
 }
 app.get('/verify',verifyUser, (req, res)=> {

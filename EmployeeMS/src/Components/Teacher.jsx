@@ -2,16 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const Employee = () => {
-  const [employee, setEmployee] = useState([]);
+const Teacher = () => {
+  const [teacher, setTeacher] = useState([]);
   const navigate = useNavigate()
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/auth/employee")
+      .get("http://localhost:3000/auth/teacher")
       .then((result) => {
         if (result.data.Status) {
-          setEmployee(result.data.Result);
+          setTeacher(result.data.Result);
         } else {
           alert(result.data.Error);
         }
@@ -19,7 +19,7 @@ const Employee = () => {
       .catch((err) => console.log(err));
   }, []);
   const handleDelete = (id) => {
-    axios.delete('http://localhost:3000/auth/delete_employee/'+id)
+    axios.delete('http://localhost:3000/auth/delete_teacher/'+id)
     .then(result => {
         if(result.data.Status) {
             window.location.reload()
@@ -31,28 +31,39 @@ const Employee = () => {
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
-        <h3>Employee List</h3>
+        <h3>Teacher List</h3>
       </div>
-      <Link to="/dashboard/add_employee" className="btn btn-success">
-        Add Employee
+      <Link to="/dashboard/add_teacher" className="btn btn-success">
+        Add Teacher
       </Link>
       <div className="mt-3">
         <table className="table">
           <thead>
             <tr>
               <th>Name</th>
+              <th>Image</th>
               <th>Email</th>
+              <th>Address</th>
+              <th>Salary</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {employee.map((e) => (
+            {teacher.map((e) => (
               <tr>
                 <td>{e.name}</td>
+                <td>
+                  <img
+                    src={`http://localhost:3000/Images/` + e.image}
+                    className="teacher_image"
+                  />
+                </td>
                 <td>{e.email}</td>
+                <td>{e.address}</td>
+                <td>{e.salary}</td>
                 <td>
                   <Link
-                    to={`/dashboard/edit_employee/` + e.id}
+                    to={`/dashboard/edit_teacher/` + e.id}
                     className="btn btn-info btn-sm me-2"
                   >
                     Edit
@@ -73,4 +84,6 @@ const Employee = () => {
   );
 };
 
-export default Employee;
+export default Teacher;
+
+

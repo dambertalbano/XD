@@ -2,15 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AddEmployee = () => {
-  const [employee, setEmployee] = useState({
+const AddTeacher = () => {
+  const [teacher, setTeacher] = useState({
     name: "",
     email: "",
     password: "",
-    salary: "",
-    address: "",
     category_id: "",
-    image: "",
   });
   const [category, setCategory] = useState([]);
   const navigate = useNavigate()
@@ -31,15 +28,15 @@ const AddEmployee = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const formData = new FormData();
-    formData.append('name', employee.name);
-    formData.append('email', employee.email);
-    formData.append('password', employee.password);
-    formData.append('category_id', employee.category_id);
+    formData.append('name', teacher.name);
+    formData.append('email', teacher.email);
+    formData.append('password', teacher.password);
+    formData.append('category_id', teacher.category_id);
 
-    axios.post('http://localhost:3000/auth/add_employee', formData)
+    axios.post('http://localhost:3000/auth/add_teacher', formData)
     .then(result => {
         if(result.data.Status) {
-            navigate('/dashboard/employee')
+            navigate('/dashboard/teacher')
         } else {
             alert(result.data.Error)
         }
@@ -50,7 +47,7 @@ const AddEmployee = () => {
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
-        <h3 className="text-center">Add Employee</h3>
+        <h3 className="text-center">Add Teacher</h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
             <label for="inputName" className="form-label">
@@ -62,7 +59,7 @@ const AddEmployee = () => {
               id="inputName"
               placeholder="Enter Name"
               onChange={(e) =>
-                setEmployee({ ...employee, name: e.target.value })
+                setTeacher({ ...teacher, name: e.target.value })
               }
             />
           </div>
@@ -77,7 +74,7 @@ const AddEmployee = () => {
               placeholder="Enter Email"
               autoComplete="off"
               onChange={(e) =>
-                setEmployee({ ...employee, email: e.target.value })
+                setTeacher({ ...teacher, email: e.target.value })
               }
             />
           </div>
@@ -91,7 +88,7 @@ const AddEmployee = () => {
               id="inputPassword4"
               placeholder="Enter Password"
               onChange={(e) =>
-                setEmployee({ ...employee, password: e.target.value })
+                setTeacher({ ...teacher, password: e.target.value })
               }
             />
           </div>
@@ -100,7 +97,7 @@ const AddEmployee = () => {
               Category
             </label>
             <select name="category" id="category" className="form-select"
-                onChange={(e) => setEmployee({...employee, category_id: e.target.value})}>
+                onChange={(e) => setTeacher({...teacher, category_id: e.target.value})}>
               {category.map((c) => {
                 return <option value={c.id}>{c.name}</option>;
               })}
@@ -108,7 +105,7 @@ const AddEmployee = () => {
           </div>
           <div className="col-12">
             <button type="submit" className="btn btn-primary w-100">
-              Add Employee
+              Add Teacher
             </button>
           </div>
         </form>
@@ -117,4 +114,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default AddTeacher;

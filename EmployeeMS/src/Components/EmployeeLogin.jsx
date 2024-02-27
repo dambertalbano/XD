@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import './style.css'
 import axios from 'axios'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './style.css'
 
 const EmployeeLogin = () => {
     const [values, setValues] = useState({
@@ -46,7 +46,7 @@ const EmployeeLogin = () => {
                 <button className='btn btn-success w-100 rounded-0 mb-2'>Log in</button>
                 <div className='mb-1'> 
                     <input type="checkbox" name="tick" id="tick" className='me-2'/>
-                    <label htmlFor="password">You are Agree with terms & conditions</label>
+                    <label htmlFor="password">You Agree with terms & conditions</label>
                 </div>
             </form>
         </div>
