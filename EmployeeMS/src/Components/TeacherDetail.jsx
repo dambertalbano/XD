@@ -25,7 +25,7 @@ const TeacherDetail = () => {
   return (
     <div>
         <div className="p-2 d-flex justify-content-center shadow">
-            <h4>Teacher Management System</h4>
+            <h4>Attendance Management System</h4>
         </div>
         <div className='d-flex justify-content-center flex-column align-items-center mt-3'>
             <div className='d-flex align-items-center flex-column mt-5'>
@@ -33,7 +33,6 @@ const TeacherDetail = () => {
                 <h3>Email: {teacher.email}</h3>
             </div>
             <div>
-                <button className='btn btn-primary me-2'>Edit</button>
                 <button className='btn btn-danger' onClick={handleLogout}>Logout</button>
             </div>
         </div>

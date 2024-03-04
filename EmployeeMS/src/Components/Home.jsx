@@ -11,6 +11,7 @@ const Home = () => {
     adminCount();
     employeeCount();
     AdminRecords();
+    teacherCount();
   }, [])
 
   const AdminRecords = () => {
@@ -43,7 +44,7 @@ const Home = () => {
     axios.get('http://localhost:3000/auth/teacher_count')
     .then(result => {
       if(result.data.Status) {
-        setteacherTotal(result.data.Result[0].employee)
+        setteacherTotal(result.data.Result[0].teacher)
       }
     })
   }

@@ -57,7 +57,7 @@ const upload = multer({
 // end imag eupload
 router.post('/add_teacher',upload.single('image'), (req, res) => {
     const sql = `INSERT INTO teacher
-    (name,email,password, address, salary,image, category_id)
+    (name,email,password, category_id)
     VALUES (?)`;
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if(err) return res.json({Status: false, Error: "Query Error"})
@@ -65,9 +65,6 @@ router.post('/add_teacher',upload.single('image'), (req, res) => {
             req.body.name,
             req.body.email,
             hash,
-            req.body.address,
-            req.body.salary,
-            req.file.filename,
             req.body.category_id
         ]
         con.query(sql, [values], (err, result) => {
@@ -97,13 +94,11 @@ router.get('/teacher/:id', (req, res) => {
 router.put('/edit_teacher/:id', (req, res) => {
     const id = req.params.id;
     const sql = `UPDATE teacher
-        set name = ?, email = ?, salary = ?, address = ?, category_id = ?
+        set name = ?, category_id = ?
         Where id = ?`
     const values = [
         req.body.name,
         req.body.email,
-        req.body.salary,
-        req.body.address,
         req.body.category_id
     ]
     con.query(sql,[...values, id], (err, result) => {
@@ -137,17 +132,10 @@ router.get('/teacher_count', (req, res) => {
     })
 })
 
-router.get('/salary_count', (req, res) => {
-    const sql = "select sum(salary) as salaryOFEmp from teacher";
-    con.query(sql, (err, result) => {
-        if(err) return res.json({Status: false, Error: "Query Error"+err})
-        return res.json({Status: true, Result: result})
-    })
-})
 
 router.post('/add_employee',upload.single('image'), (req, res) => {
     const sql = `INSERT INTO employee
-    (name,email,password, address, salary,image, category_id)
+    (name,email,password, category_id)
     VALUES (?)`;
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if(err) return res.json({Status: false, Error: "Query Error"})
@@ -155,9 +143,6 @@ router.post('/add_employee',upload.single('image'), (req, res) => {
             req.body.name,
             req.body.email,
             hash,
-            req.body.address,
-            req.body.salary,
-            req.file.filename,
             req.body.category_id
         ]
         con.query(sql, [values], (err, result) => {
@@ -187,13 +172,11 @@ router.get('/employee/:id', (req, res) => {
 router.put('/edit_employee/:id', (req, res) => {
     const id = req.params.id;
     const sql = `UPDATE employee
-        set name = ?, email = ?, salary = ?, address = ?, category_id = ?
+        set name = ?, email = ?, category_id = ?
         Where id = ?`
     const values = [
         req.body.name,
         req.body.email,
-        req.body.salary,
-        req.body.address,
         req.body.category_id
     ]
     con.query(sql,[...values, id], (err, result) => {
@@ -250,7 +233,7 @@ router.get('/logout', (req, res) => {
 
 router.post('/add_teacher',upload.single('image'), (req, res) => {
     const sql = `INSERT INTO teacher
-    (name,email,password, address, salary,image, category_id)
+    (name,email,password, category_id)
     VALUES (?)`;
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if(err) return res.json({Status: false, Error: "Query Error"})
@@ -258,9 +241,6 @@ router.post('/add_teacher',upload.single('image'), (req, res) => {
             req.body.name,
             req.body.email,
             hash,
-            req.body.address,
-            req.body.salary,
-            req.file.filename,
             req.body.category_id
         ]
         con.query(sql, [values], (err, result) => {
@@ -290,13 +270,11 @@ router.get('/teacher/:id', (req, res) => {
 router.put('/edit_teacher/:id', (req, res) => {
     const id = req.params.id;
     const sql = `UPDATE teacher
-        set name = ?, email = ?, salary = ?, address = ?, category_id = ?
+        set name = ?, email = ?, category_id = ?
         Where id = ?`
     const values = [
         req.body.name,
         req.body.email,
-        req.body.salary,
-        req.body.address,
         req.body.category_id
     ]
     con.query(sql,[...values, id], (err, result) => {

@@ -7,10 +7,7 @@ const AddEmployee = () => {
     name: "",
     email: "",
     password: "",
-    salary: "",
-    address: "",
     category_id: "",
-    image: "",
   });
   const [category, setCategory] = useState([]);
   const navigate = useNavigate()
