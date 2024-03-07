@@ -45,6 +45,9 @@ const TeacherLogin = () => {
                 </div>
                 <button className='btn btn-success w-100 rounded-0 mb-2'>Log in</button>
             </form>
+            <div className="d-flex justify-content-center mt-1 mb-1">
+  <a href="/teacher_register" className="">Register as Teacher</a>
+</div> 
         </div>
     </div>
   )

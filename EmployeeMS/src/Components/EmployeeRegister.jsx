@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AddEmployee = () => {
+const EmployeeRegister = () => {
   const [employee, setEmployee] = useState({
     name: "",
     email: "",
@@ -36,7 +36,7 @@ const AddEmployee = () => {
     axios.post('http://localhost:3000/add_employee', formData)
     .then(result => {
         if(result.data.Status) {
-            navigate('/dashboard/employee')
+            navigate('employee_register')
         } else {
             alert(result.data.Error)
         }
@@ -47,7 +47,7 @@ const AddEmployee = () => {
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
-        <h3 className="text-center">Add Employee</h3>
+        <h3 className="text-center">Student Registration    </h3>
         <form className="row g-1" onSubmit={handleSubmit}>
           <div className="col-12">
             <label for="inputName" className="form-label">
@@ -114,4 +114,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default EmployeeRegister;

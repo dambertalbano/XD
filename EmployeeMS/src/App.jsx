@@ -11,6 +11,7 @@ import EditTeacher from './Components/EditTeacher'
 import Employee from './Components/Employee'
 import EmployeeDetail from './Components/EmployeeDetail'
 import EmployeeLogin from './Components/EmployeeLogin'
+import EmployeeRegister from './Components/EmployeeRegister'
 import Home from './Components/Home'
 import Login from './Components/Login'
 import PrivateRoute from './Components/PrivateRoute'
@@ -19,6 +20,7 @@ import Start from './Components/Start'
 import Teacher from './Components/Teacher'
 import TeacherDetail from './Components/TeacherDetail'
 import TeacherLogin from './Components/TeacherLogin'
+import TeacherRegister from './Components/TeacherRegister'
 
 
 
@@ -32,6 +34,8 @@ function App() {
       <Route path='/employee_detail/:id' element={<EmployeeDetail />}></Route>
       <Route path='/teacher_login' element={<TeacherLogin />}></Route>
       <Route path='/teacher_detail/:id' element={<TeacherDetail />}></Route>
+      <Route path='/employee_register' element={<EmployeeRegister />}></Route>
+      <Route path='/teacher_register' element={<TeacherRegister />}></Route>
       <Route path='/dashboard' element={
         <PrivateRoute >
           <Dashboard />
